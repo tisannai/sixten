@@ -77,6 +77,8 @@
     typedef name##_s*             name##_t; \
     typedef name##_s**            name##_p;
 
+#define st_struct_body( name )              \
+    struct name##struct_s
 
 /**
  * Define enumeration and corresponding type. An enum is created with
@@ -120,11 +122,13 @@ typedef void* st_t;
 typedef void** st_p;
 
 
-st_type( int8_t, st_ch );    /**< Character type. */
 st_type( int8_t, st_i8 );    /**< Character type. */
 st_type( uint8_t, st_u8 );   /**< Character type. */
 st_type( int64_t, st_i64 );  /**< Int type (64-bits). */
 st_type( uint64_t, st_u64 ); /**< Unsigned int type (64-bits). */
+
+st_type( char*, st_str );     /**< String type. */
+st_type( double, st_flt );   /**< 64-bit floating point. .*/
 
 st_type( uint64_t, st_size ); /**< Size of allocation type. */
 st_type( int64_t, st_pos );   /**< Position in array. */
@@ -157,15 +161,21 @@ st_type( uint64_t, st_id );   /**< Identification number type. */
 #ifndef SIXTEN_NO_MEM_API
 
 /* clang-format off */
-#define st_new( type )                 calloc( 1, sizeof( type ) )
-#define st_new_n( type, n )            calloc( ( n ), sizeof( type ) )
-#define st_del( mem )                  free( mem )
-#define st_alloc( size )               calloc( 1, ( size ) )
-#define st_realloc( mem, size )        realloc( ( mem ), ( size ) )
-#define st_cpy( src, dst, size )       memcpy( ( dst ), ( src ), ( size ) )
-#define st_cpy_type( src, dst, type )  memcpy( ( dst ), ( src ), sizeof( type ) )
-#define st_mov( src, dst, size )       memmove( ( dst ), ( src ), ( size ) )
-#define st_clr( mem, size )            memset( ( mem ), 0, ( size ) )
+#define st_new( type )                   calloc( 1, sizeof( type ) )
+#define st_new_n( type, n )              calloc( ( n ), sizeof( type ) )
+#define st_del( mem )                    free( mem )
+#define st_alloc( size )                 calloc( 1, ( size ) )
+#define st_realloc( mem, size )          realloc( ( mem ), ( size ) )
+#define st_free( mem )                   free( mem )
+#define st_strdup( str )                 strdup( str )
+#define st_memcpy( src, dst, size )      memcpy( ( dst ), ( src ), ( size ) )
+#define st_memcpy_type( src, dst, type ) memcpy( ( dst ), ( src ), sizeof( type ) )
+#define st_memmov( src, dst, size )      memmove( ( dst ), ( src ), ( size ) )
+#define st_memmov_type( src, dst, type ) memmove( ( dst ), ( src ), sizeof( type ) )
+#define st_memclr( mem, size )           memset( ( mem ), 0, ( size ) )
+#define st_memclr_type( mem, type )      memset( ( mem ), 0, sizeof( type ) )
+#define st_memcmp( m1, m2, size )        memcmp( ( m1 ), ( m2 ), ( size ) )
+#define st_memcmp_type( m1, m2, type)    memcmp( ( m1 ), ( m2 ), sizeof( type ) )
 /* clang-format on */
 
 #endif

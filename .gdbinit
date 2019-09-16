@@ -1,4 +1,4 @@
-file build/test/out/test_example.out
+file build/test/out/test_basic.out
 set breakpoint pending on
-break test_example
+break test_basic
 run
