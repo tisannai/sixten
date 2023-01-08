@@ -60,7 +60,13 @@ void st_assert_idle_fn( const char* cond,
                         const char* func,
                         const char* format,
                         ... )
-{}
+{
+    (void)cond;
+    (void)file;
+    (void)line;
+    (void)func;
+    (void)format;
+}
 
 
 /* ------------------------------------------------------------
