@@ -41,7 +41,9 @@ void st_assert_used_fn( const char* cond,
         fputc( '\n', st_stderr );
     }
 
+#ifndef NDEBUG
     __assert( cond, file, line );
+#endif
 }
 
 

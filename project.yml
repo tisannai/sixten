@@ -103,6 +103,7 @@
   :release_compiler:
     :executable: gcc
     :arguments:
+      - -DNDEBUG
       - ${1}
       - -Wall
 #      - -std=c11
